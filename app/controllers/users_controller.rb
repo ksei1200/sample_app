@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)   # user_paramを別メソッドとして呼び出し
     if @user.save
+      log_in @user
       flash[:success] = "Welcome to the Sample App!"
       redirect_to user_url(@user)
       # 保存し、chckのtrue 、falseによって次のアクションを変える
