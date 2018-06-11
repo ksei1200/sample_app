@@ -73,6 +73,10 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
   
+  test "authenticated? should return false for a user with nil digest" do
+    assert_not @user.authenticated?('')
+  end  
+  
   test "associated microposts should be destroyed" do
     @user.save
     @user.microposts.create!(content: "Lorem ipsum")
@@ -108,5 +112,5 @@ class UserTest < ActiveSupport::TestCase
     archer.microposts.each do |post_unfollowed|
       assert_not michael.feed.include?(post_unfollowed)
     end
-  end  
+  end
 end  
